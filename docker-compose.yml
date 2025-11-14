@@ -13,7 +13,7 @@ services:
       RAILS_LOG_TO_STDOUT: 'true'
     env_file:
       - .env
-    volumes:
-      - .:/app
+#    volumes:
+#      - .:/app
     working_dir: /app
     command: bash -lc "bundle exec rails db:migrate && bundle exec rails s -b 0.0.0.0 -p 3001"
