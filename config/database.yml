@@ -81,6 +81,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     database: aoka_production
     username: aoka
     password: <%= ENV["AOKA_DATABASE_PASSWORD"] %>
