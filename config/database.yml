@@ -81,18 +81,18 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: aoka_api_production
-    username: aoka_api
-    password: <%= ENV["AOKA_API_DATABASE_PASSWORD"] %>
+    database: aoka_production
+    username: aoka
+    password: <%= ENV["AOKA_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: aoka_api_production_cache
+    database: aoka_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: aoka_api_production_queue
+    database: aoka_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: aoka_api_production_cable
+    database: aoka_production_cable
     migrations_paths: db/cable_migrate
