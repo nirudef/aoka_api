@@ -1,6 +1,6 @@
 # app/mailers/contact_mailer.rb
 class ContactMailer < ApplicationMailer
-  default to: 'info@pravoved.kz'
+  default to: '7657721@gmail.com'
 
   def notify_admin
     @name = params[:name]
