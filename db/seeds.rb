@@ -219,7 +219,7 @@ puts "Очистка старых данных..."
 #   end
 # end
 
-require "faker"
+# require "faker"
 
 # puts "Очистка базы..."
 # User.destroy_all
@@ -362,223 +362,223 @@ require "faker"
 #
 # puts "Создание администратора..."
 #
-# User.create!(
-#   first_name: "Админ",
-#   last_name: "Системный",
-#   middle_name: nil,
-#   iin: "750101600999",
-#   phone: "+7 700 000 0000",
-#   email: "admin@bar.kz",
-#   password: "admin123123!",
-#   roles: ["admin"]
-# )
+User.create!(
+  first_name: "Админ",
+  last_name: "Системный",
+  middle_name: nil,
+  iin: "750101600999",
+  phone: "+7 700 000 0000",
+  email: "admin@bar.kz",
+  password: "admin123123!",
+  roles: ["admin"]
+)
 #
 # puts "✅ Сиды успешно загружены!"
 
 # db/seeds.rb
-puts "🌱 Запуск сидов АОКА..."
-Article.destroy_all
-Category.destroy_all
-
-# 1. Создаём категории
-CATEGORIES = [
-  { key: 'news', names: { ru: 'Новости', kk: 'Жаңалықтар', en: 'News' } },
-  { key: 'contest', names: { ru: 'Конкурсы', kk: 'Байқаулар', en: 'Contests' } },
-  { key: 'announcement', names: { ru: 'Объявления', kk: 'Хабарландырулар', en: 'Announcements' } },
-  { key: 'event', names: { ru: 'Мероприятия', kk: 'Іс-шаралар', en: 'Events' } },
-  { key: 'legislation', names: { ru: 'Законодательство', kk: 'Заңнама', en: 'Legislation' } },
-].freeze
-
-categories = {}
-CATEGORIES.each do |data|
-  category = Category.create!(
-    key: data[:key],
-    position: CATEGORIES.index(data)
-  )
-
-  data[:names].each do |locale, name|
-    CategoryTranslation.create!(
-      category: category,
-      locale: locale,
-      name: name
-    )
-  end
-
-  categories[data[:key]] = category
-  puts "✅ Категория: #{data[:key]} (#{data[:names][:ru]})"
-end
-
-# 2. Вспомогательная функция для slug через friendly_id
-def generate_slug(title_ru)
-  # Транслитерация через I18n (более надёжная)
-  slug = I18n.transliterate(title_ru, locale: :ru)
-             .downcase
-             .gsub(/[^a-z0-9\s\-]/, '')
-             .gsub(/\s+/, '-')
-             .gsub(/-+/, '-')
-             .gsub(/^-|-$/, '')
-
-  # Если slug пустой, генерируем случайный
-  slug = "article-#{SecureRandom.hex(4)}" if slug.blank?
-
-  # Проверка уникальности
-  original_slug = slug
-  counter = 2
-  while Article.exists?(slug: slug)
-    slug = "#{original_slug}-#{counter}"
-    counter += 1
-  end
-
-  slug
-end
-
+# puts "🌱 Запуск сидов АОКА..."
+# Article.destroy_all
+# Category.destroy_all
+#
+# # 1. Создаём категории
+# CATEGORIES = [
+#   { key: 'news', names: { ru: 'Новости', kk: 'Жаңалықтар', en: 'News' } },
+#   { key: 'contest', names: { ru: 'Конкурсы', kk: 'Байқаулар', en: 'Contests' } },
+#   { key: 'announcement', names: { ru: 'Объявления', kk: 'Хабарландырулар', en: 'Announcements' } },
+#   { key: 'event', names: { ru: 'Мероприятия', kk: 'Іс-шаралар', en: 'Events' } },
+#   { key: 'legislation', names: { ru: 'Законодательство', kk: 'Заңнама', en: 'Legislation' } },
+# ].freeze
+#
+# categories = {}
+# CATEGORIES.each do |data|
+#   category = Category.create!(
+#     key: data[:key],
+#     position: CATEGORIES.index(data)
+#   )
+#
+#   data[:names].each do |locale, name|
+#     CategoryTranslation.create!(
+#       category: category,
+#       locale: locale,
+#       name: name
+#     )
+#   end
+#
+#   categories[data[:key]] = category
+#   puts "✅ Категория: #{data[:key]} (#{data[:names][:ru]})"
+# end
+#
+# # 2. Вспомогательная функция для slug через friendly_id
 # def generate_slug(title_ru)
-#   # Имитируем friendly_id.normalize_friendly_id
-#   text = title_ru
-#            .gsub(/ә|а́/, 'a').gsub(/ғ|ѓ/, 'g').gsub(/қ|ќ/, 'k')
-#            .gsub(/ң|н́/, 'n').gsub(/ө|о́/, 'o').gsub(/ұ|у́/, 'u')
-#            .gsub(/ү|ы́/, 'u').gsub(/һ|х́/, 'h').gsub(/і|и́/, 'i')
-#            .gsub(/й/, 'y').gsub(/[ъь]/, '')
-#   text = I18n.transliterate(text, locale: :ru)
-#   text.downcase.gsub(/[^a-z0-9\s\-]/, '').gsub(/\s+/, '-').gsub(/-+/, '-').gsub(/^-|-$/, '')
+#   # Транслитерация через I18n (более надёжная)
+#   slug = I18n.transliterate(title_ru, locale: :ru)
+#              .downcase
+#              .gsub(/[^a-z0-9\s\-]/, '')
+#              .gsub(/\s+/, '-')
+#              .gsub(/-+/, '-')
+#              .gsub(/^-|-$/, '')
+#
+#   # Если slug пустой, генерируем случайный
+#   slug = "article-#{SecureRandom.hex(4)}" if slug.blank?
+#
+#   # Проверка уникальности
+#   original_slug = slug
+#   counter = 2
+#   while Article.exists?(slug: slug)
+#     slug = "#{original_slug}-#{counter}"
+#     counter += 1
+#   end
+#
+#   slug
 # end
-
-# 3. Статьи
-ARTICLES = [
-  {
-    key: :contest,
-    ru: {
-      title: 'Конкурс молодых адвокатов 2025',
-      lead: 'АОКА объявляет о проведении ежегодного конкурса для начинающих юристов.',
-      body: '<p>Конкурс направлен на выявление и поддержку талантливых молодых специалистов. Приём заявок до 15 апреля 2025 года.</p>',
-      meta_title: 'Конкурс молодых адвокатов — АОКА',
-      meta_description: 'Принимайте участие в конкурсе молодых адвокатов 2025 года!'
-    },
-    kk: {
-      title: 'Жас адвокаттар байқауы 2025',
-      lead: 'АОКА жас заңгерлер арасында жыл сайынғы байқауды жариялайды.',
-      body: '<p>Байқау талантты жас мамандарды анықтау және қолдау мақсатын көздейді. Өтініштерді 2025 жылғы 15 сәуірге дейін қабылдаймыз.</p>',
-      meta_title: 'Жас адвокаттар байқауы — АОКА',
-      meta_description: '2025 жылғы жас адвокаттар байқауына қатысыңыз!'
-    },
-    en: {
-      title: 'Young Lawyers Contest 2025',
-      lead: 'AOKA announces the annual contest for young lawyers.',
-      body: '<p>The contest aims to identify and support talented young professionals. Applications accepted until April 15, 2025.</p>',
-      meta_title: 'Young Lawyers Contest — AOKA',
-      meta_description: 'Join the Young Lawyers Contest 2025!'
-    },
-    published_at: 1.week.ago
-  },
-
-  {
-    key: :news,
-    ru: {
-      title: 'Новый состав Совета Коллегии',
-      lead: 'Избран новый состав Совета Алматинской областной коллегии адвокатов.',
-      body: '<p>На отчётно-выборной конференции 10 марта 2025 года избран новый состав Совета АОКА во главе с Сакеном Махышевым.</p>',
-      meta_title: 'Совет АОКА — Алматинская областная коллегия адвокатов',
-      meta_description: 'Новый состав Совета АОКА избран на конференции.'
-    },
-    kk: {
-      title: 'Коллегия Кеңесінің жаңа құрамы',
-      lead: 'Алматы облыстық адвокаттар коллегиясы Кеңесінің жаңа құрамы сайланды.',
-      body: '<p>2025 жылғы 10 наурызда есеп-сайлау конференциясында Сакен Маһышев бастаған АОКА Кеңесінің жаңа құрамы сайланды.</p>',
-      meta_title: 'АОКА Кеңесі',
-      meta_description: 'Конференцияда АОКА Кеңесінің жаңа құрамы сайланды.'
-    },
-    en: {
-      title: 'New Board of the Bar Association',
-      lead: 'The new Board of Almaty Regional Bar Association has been elected.',
-      body: '<p>At the reporting and election conference on March 10, 2025, the new AOKA Board headed by Saken Mahyshev was elected.</p>',
-      meta_title: 'AOKA Board',
-      meta_description: 'New AOKA Board elected at the conference.'
-    },
-    published_at: 2.days.ago
-  },
-
-  {
-    key: :legislation,
-    ru: {
-      title: 'Қылмыс сот әділеттілігі Изменения в Уголовно-процессуальном кодексе',
-      lead: 'С 1 апреля 2025 года вступают в силу поправки в УПК РК.',
-      body: '<p>Поправки касаются упрощения производства по делам частного обвинения и усиления прав защиты.</p>',
-      meta_title: 'Изменения в УПК РК — АОКА',
-      meta_description: 'Новые поправки в Уголовно-процессуальный кодекс с 1 апреля 2025.'
-    },
-    kk: {
-      title: 'Қылмыс сот әділеттілігі кодексіндегі өзгерістер',
-      lead: 'ҚР ҚСӘК-не 2025 жылғы 1 сәуірден бастап өзгерістер енгізіледі.',
-      body: '<p>Өзгерістер жеке айыптаулар бойынша істерді қарапайымдату және қорғаныс құқықтарын нығайтуға қатысты.</p>',
-      meta_title: 'ҚСӘК-не өзгерістер — АОКА',
-      meta_description: '2025 жылғы 1 сәуірден Қылмыс сот әділеттілігі кодексіне өзгерістер кіреді.'
-    },
-    en: {
-      title: 'Amendments to the Criminal Procedure Code',
-      lead: 'Amendments to the CPC of the RK enter into force on April 1, 2025.',
-      body: '<p>The amendments simplify proceedings in private prosecution cases and strengthen defense rights.</p>',
-      meta_title: 'CPC Amendments — AOKA',
-      meta_description: 'New amendments to the Criminal Procedure Code effective April 1, 2025.'
-    },
-    published_at: Time.current
-  }
-].freeze
-
-# 4. Создаём статьи
-ARTICLES.each_with_index do |data, index|
-  # title = data[:ru][:title]
-  # slug = generate_slug(title)
-  #
-  # puts "🔍 Отладка:"
-  # puts "   Заголовок: #{title}"
-  # puts "   Slug: #{slug}"
-
-  begin
-    # Создаём статью вместе с переводами через accepts_nested_attributes
-    # Или используем транзакцию для атомарности
-    article = nil
-
-    Article.transaction do
-      article = Article.new(
-        # slug: generate_slug(data[:ru][:title]),
-        status: 'published',
-        published_at: data[:published_at],
-        category: categories[data[:key]]
-      )
-
-      # Создаём переводы ДО сохранения статьи
-      %w[ru kk en].each do |locale|
-        trans = data[locale.to_sym]
-        article.article_translations.build(
-          locale: locale,
-          title: trans[:title],
-          lead: trans[:lead],
-          body: trans[:body],
-          meta_title: trans[:meta_title],
-          meta_description: trans[:meta_description]
-        )
-      end
-
-      # Теперь сохраняем статью вместе с переводами
-      article.save!
-    end
-
-    puts "✅ Статья: #{data[:ru][:title]} → /#{article.slug}"
-
-  rescue ActiveRecord::RecordInvalid => e
-    puts "❌ Ошибка при создании статьи ##{index + 1}:"
-    puts "   Данные: #{data[:ru][:title]}"
-    puts "   Ошибка: #{e.message}"
-    puts "   Детали: #{e.record.errors.full_messages.join(', ')}"
-    raise e
-  end
-end
-
-
+#
+# # def generate_slug(title_ru)
+# #   # Имитируем friendly_id.normalize_friendly_id
+# #   text = title_ru
+# #            .gsub(/ә|а́/, 'a').gsub(/ғ|ѓ/, 'g').gsub(/қ|ќ/, 'k')
+# #            .gsub(/ң|н́/, 'n').gsub(/ө|о́/, 'o').gsub(/ұ|у́/, 'u')
+# #            .gsub(/ү|ы́/, 'u').gsub(/һ|х́/, 'h').gsub(/і|и́/, 'i')
+# #            .gsub(/й/, 'y').gsub(/[ъь]/, '')
+# #   text = I18n.transliterate(text, locale: :ru)
+# #   text.downcase.gsub(/[^a-z0-9\s\-]/, '').gsub(/\s+/, '-').gsub(/-+/, '-').gsub(/^-|-$/, '')
+# # end
+#
+# # 3. Статьи
+# ARTICLES = [
+#   {
+#     key: :contest,
+#     ru: {
+#       title: 'Конкурс молодых адвокатов 2025',
+#       lead: 'АОКА объявляет о проведении ежегодного конкурса для начинающих юристов.',
+#       body: '<p>Конкурс направлен на выявление и поддержку талантливых молодых специалистов. Приём заявок до 15 апреля 2025 года.</p>',
+#       meta_title: 'Конкурс молодых адвокатов — АОКА',
+#       meta_description: 'Принимайте участие в конкурсе молодых адвокатов 2025 года!'
+#     },
+#     kk: {
+#       title: 'Жас адвокаттар байқауы 2025',
+#       lead: 'АОКА жас заңгерлер арасында жыл сайынғы байқауды жариялайды.',
+#       body: '<p>Байқау талантты жас мамандарды анықтау және қолдау мақсатын көздейді. Өтініштерді 2025 жылғы 15 сәуірге дейін қабылдаймыз.</p>',
+#       meta_title: 'Жас адвокаттар байқауы — АОКА',
+#       meta_description: '2025 жылғы жас адвокаттар байқауына қатысыңыз!'
+#     },
+#     en: {
+#       title: 'Young Lawyers Contest 2025',
+#       lead: 'AOKA announces the annual contest for young lawyers.',
+#       body: '<p>The contest aims to identify and support talented young professionals. Applications accepted until April 15, 2025.</p>',
+#       meta_title: 'Young Lawyers Contest — AOKA',
+#       meta_description: 'Join the Young Lawyers Contest 2025!'
+#     },
+#     published_at: 1.week.ago
+#   },
+#
+#   {
+#     key: :news,
+#     ru: {
+#       title: 'Новый состав Совета Коллегии',
+#       lead: 'Избран новый состав Совета Алматинской областной коллегии адвокатов.',
+#       body: '<p>На отчётно-выборной конференции 10 марта 2025 года избран новый состав Совета АОКА во главе с Сакеном Махышевым.</p>',
+#       meta_title: 'Совет АОКА — Алматинская областная коллегия адвокатов',
+#       meta_description: 'Новый состав Совета АОКА избран на конференции.'
+#     },
+#     kk: {
+#       title: 'Коллегия Кеңесінің жаңа құрамы',
+#       lead: 'Алматы облыстық адвокаттар коллегиясы Кеңесінің жаңа құрамы сайланды.',
+#       body: '<p>2025 жылғы 10 наурызда есеп-сайлау конференциясында Сакен Маһышев бастаған АОКА Кеңесінің жаңа құрамы сайланды.</p>',
+#       meta_title: 'АОКА Кеңесі',
+#       meta_description: 'Конференцияда АОКА Кеңесінің жаңа құрамы сайланды.'
+#     },
+#     en: {
+#       title: 'New Board of the Bar Association',
+#       lead: 'The new Board of Almaty Regional Bar Association has been elected.',
+#       body: '<p>At the reporting and election conference on March 10, 2025, the new AOKA Board headed by Saken Mahyshev was elected.</p>',
+#       meta_title: 'AOKA Board',
+#       meta_description: 'New AOKA Board elected at the conference.'
+#     },
+#     published_at: 2.days.ago
+#   },
+#
+#   {
+#     key: :legislation,
+#     ru: {
+#       title: 'Қылмыс сот әділеттілігі Изменения в Уголовно-процессуальном кодексе',
+#       lead: 'С 1 апреля 2025 года вступают в силу поправки в УПК РК.',
+#       body: '<p>Поправки касаются упрощения производства по делам частного обвинения и усиления прав защиты.</p>',
+#       meta_title: 'Изменения в УПК РК — АОКА',
+#       meta_description: 'Новые поправки в Уголовно-процессуальный кодекс с 1 апреля 2025.'
+#     },
+#     kk: {
+#       title: 'Қылмыс сот әділеттілігі кодексіндегі өзгерістер',
+#       lead: 'ҚР ҚСӘК-не 2025 жылғы 1 сәуірден бастап өзгерістер енгізіледі.',
+#       body: '<p>Өзгерістер жеке айыптаулар бойынша істерді қарапайымдату және қорғаныс құқықтарын нығайтуға қатысты.</p>',
+#       meta_title: 'ҚСӘК-не өзгерістер — АОКА',
+#       meta_description: '2025 жылғы 1 сәуірден Қылмыс сот әділеттілігі кодексіне өзгерістер кіреді.'
+#     },
+#     en: {
+#       title: 'Amendments to the Criminal Procedure Code',
+#       lead: 'Amendments to the CPC of the RK enter into force on April 1, 2025.',
+#       body: '<p>The amendments simplify proceedings in private prosecution cases and strengthen defense rights.</p>',
+#       meta_title: 'CPC Amendments — AOKA',
+#       meta_description: 'New amendments to the Criminal Procedure Code effective April 1, 2025.'
+#     },
+#     published_at: Time.current
+#   }
+# ].freeze
+#
+# # 4. Создаём статьи
+# ARTICLES.each_with_index do |data, index|
+#   # title = data[:ru][:title]
+#   # slug = generate_slug(title)
+#   #
+#   # puts "🔍 Отладка:"
+#   # puts "   Заголовок: #{title}"
+#   # puts "   Slug: #{slug}"
+#
+#   begin
+#     # Создаём статью вместе с переводами через accepts_nested_attributes
+#     # Или используем транзакцию для атомарности
+#     article = nil
+#
+#     Article.transaction do
+#       article = Article.new(
+#         # slug: generate_slug(data[:ru][:title]),
+#         status: 'published',
+#         published_at: data[:published_at],
+#         category: categories[data[:key]]
+#       )
+#
+#       # Создаём переводы ДО сохранения статьи
+#       %w[ru kk en].each do |locale|
+#         trans = data[locale.to_sym]
+#         article.article_translations.build(
+#           locale: locale,
+#           title: trans[:title],
+#           lead: trans[:lead],
+#           body: trans[:body],
+#           meta_title: trans[:meta_title],
+#           meta_description: trans[:meta_description]
+#         )
+#       end
+#
+#       # Теперь сохраняем статью вместе с переводами
+#       article.save!
+#     end
+#
+#     puts "✅ Статья: #{data[:ru][:title]} → /#{article.slug}"
+#
+#   rescue ActiveRecord::RecordInvalid => e
+#     puts "❌ Ошибка при создании статьи ##{index + 1}:"
+#     puts "   Данные: #{data[:ru][:title]}"
+#     puts "   Ошибка: #{e.message}"
+#     puts "   Детали: #{e.record.errors.full_messages.join(', ')}"
+#     raise e
+#   end
 # end
-
-puts "🚀 Сиды успешно загружены!"
-puts "👉 Проверьте в консоли:"
-puts "   Article.first.slug"
-puts "   Article.first.category.name('ru')"
-puts "   Article.published.count"
+#
+#
+# # end
+#
+# puts "🚀 Сиды успешно загружены!"
+# puts "👉 Проверьте в консоли:"
+# puts "   Article.first.slug"
+# puts "   Article.first.category.name('ru')"
+# puts "   Article.published.count"
