@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      env_file:
+        - .env
     image: aoka-api:latest
     restart: always
     network_mode: "host"      # !! контейнер использует сеть хоста
@@ -15,5 +17,3 @@ services:
       - .:/app
     working_dir: /app
     command: bash -lc "bundle exec rails db:migrate && bundle exec rails s -b 0.0.0.0 -p 3001"
-    env_file:
-      - .env
