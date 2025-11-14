@@ -1,0 +1,7 @@
+<h2>Новое сообщение с сайта</h2>
+
+<p><strong>Имя:</strong> <%= @name %></p>
+<p><strong>Email:</strong> <%= params[:email] %></p>
+<p><strong>Язык:</strong> <%= @lang %></p>
+<p><strong>Сообщение:</strong></p>
+<p><%= simple_format(@message) %></p>

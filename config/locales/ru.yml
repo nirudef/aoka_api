@@ -1,0 +1,28 @@
+ru:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Запись недействительна: %{errors}"
+        blank: "не может быть пустым"
+        taken: "уже занято"
+        invalid: "имеет неверное значение"
+        too_short: "слишком короткий (минимум %{count} символов)"
+        too_long: "слишком длинный (максимум %{count} символов)"
+        inclusion: "имеет непредусмотренное значение"
+      models:
+        article_translation:
+          attributes:
+            title:
+              blank: "Заголовок не может быть пустым"
+            body:
+              blank: "Текст статьи не может быть пустым"
+            locale:
+              blank: "Язык не указан"
+              inclusion: "Недопустимый язык"
+        article:
+          attributes:
+            slug:
+              blank: "URL-адрес не может быть пустым"
+              taken: "URL-адрес уже используется"
+            published_at:
+              blank: "Дата публикации обязательна для опубликованных статей"
