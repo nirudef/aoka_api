@@ -1,6 +1,6 @@
 # app/controllers/api/v1/contact_messages_controller.rb
 class Api::V1::ContactMessagesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
 
   def create
     name = params[:name]
