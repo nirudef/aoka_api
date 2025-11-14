@@ -3,8 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      env_file:
-        - .env
     image: aoka-api:latest
     restart: always
     network_mode: "host"      # !! контейнер использует сеть хоста
@@ -13,6 +11,8 @@ services:
       DATABASE_URL: ENV["DATABASE_URL"]
       SECRET_KEY_BASE: ENV["SECRET_KEY_BASE"]
       RAILS_LOG_TO_STDOUT: 'true'
+    env_file:
+      - .env
     volumes:
       - .:/app
     working_dir: /app
