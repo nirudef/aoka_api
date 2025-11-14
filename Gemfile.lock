@@ -101,7 +101,7 @@ GEM
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
-    faker (3.5.1)
+    faker (3.5.2)
       i18n (>= 1.8.11, < 2)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
@@ -362,7 +362,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
-  faker (~> 3.4)
+  faker (~> 3.5)
   friendly_id (~> 5.5.0)
   globalize
   kamal
