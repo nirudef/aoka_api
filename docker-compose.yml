@@ -9,10 +9,12 @@ services:
     network_mode: "host"      # !! контейнер использует сеть хоста
     environment:
       RAILS_ENV: production
-      DATABASE_URL: "postgres://aoka:reliant2015!@127.0.0.1:5432/aoka_production"
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_URL: ENV["DATABASE_URL"] "postgres://aoka:reliant2015!@127.0.0.1:5432/aoka_production"
+      SECRET_KEY_BASE: ENV["SECRET_KEY_BASE"]
       RAILS_LOG_TO_STDOUT: 'true'
     volumes:
       - .:/app
     working_dir: /app
     command: bash -lc "bundle exec rails db:migrate && bundle exec rails s -b 0.0.0.0 -p 3001"
+    env_file:
+      - .env
