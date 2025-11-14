@@ -66,4 +66,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
+RUN mkdir -p /app/tmp/cache && chmod -R 777 /app/tmp
 CMD ["./bin/thrust", "./bin/rails", "server"]
