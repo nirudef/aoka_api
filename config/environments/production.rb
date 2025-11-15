@@ -66,8 +66,8 @@ Rails.application.configure do
     authentication: "plain",
     open_timeout: 5,
     read_timeout: 5,
-    ssl: true
-    # openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+    ssl: true,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
