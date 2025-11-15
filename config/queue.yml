@@ -16,9 +16,3 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  host: <%= ENV.fetch("DB_HOST", "172.17.0.1") %>
-  database: <%= ENV.fetch("DB_NAME", "aoka_production") %>
-  username: <%= ENV.fetch("DB_USER", "aoka") %>
-  password: <%= ENV.fetch("DB_PASSWORD", "reliant2015!") %>
-  pool: 5
