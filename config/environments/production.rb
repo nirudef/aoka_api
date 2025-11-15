@@ -60,7 +60,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "mail.aoka.xn--80ao21a",
-    port: 25,
+    port: 465,
     user_name: "noreply@aoka.xn--80ao21a",
     password: "50gg79$hG",
     authentication: "plain",
