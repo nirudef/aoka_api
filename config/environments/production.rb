@@ -59,14 +59,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "mail.aoka.қаз",
-    port: 25,
-    user_name: "noreply@aoka.қаз",
+    address: "mail.aoka.xn--80ao21a",
+    port: 465,
+    user_name: "noreply@aoka.xn--80ao21a",
     password: "50gg79$hG",
     authentication: "plain",
     open_timeout: 5,
     read_timeout: 5,
-    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+    ssl: true
+    # openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
