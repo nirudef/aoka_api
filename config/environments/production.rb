@@ -55,13 +55,13 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "aoka.xn--80ao21a" }
+  config.action_mailer.default_url_options = { host: "aoka.қаз" }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "mail.aoka.xn--80ao21a",
-    port: 465,
-    user_name: "noreply@aoka.xn--80ao21a",
+    address: "mail.aoka.қаз",
+    port: 25,
+    user_name: "noreply@aoka.қаз",
     password: "50gg79$hG",
     authentication: "plain",
     open_timeout: 5,
